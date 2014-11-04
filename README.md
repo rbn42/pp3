@@ -2,4 +2,4 @@ pp3
 ===
 
 a ping pong like 3D game, inspired by the flash game curveball.
-<a href=http://robinwkt.github.io/pp3/build/0.1 > Play </a>
+![Play](http://robinwkt.github.io/pp3/build) 
