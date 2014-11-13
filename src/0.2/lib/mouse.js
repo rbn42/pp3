@@ -5,19 +5,18 @@ function initMouseBind(canvas) {
 		mousePosition[1] = y / $(canvas).height();
 	}
 
-	function onDocumentMouseMove(event) {
-		MoveMouse(event.clientX, event.clientY);
-	}
-
 	function onDocumentTouchMove(event) {
-		if (event.touches.length == 1) {
-			event.preventDefault();
-			MoveMouse(event.touches[0].clientX, event.touches[0].clientY);
-		}
+		// touchobj;
+		if (event.touches&&event.touches.length > 0)
+	 		var  touchobj = event.touches[0];  
+		else if (event.changedTouches&&event.changedTouches.length > 0)
+			var touchobj = event.changedTouches[0];
+		else if(event.clientX)
+			var  touchobj = event;
+		MoveMouse(touchobj.clientX, touchobj.clientY);  
 	} 
-
-	$(window).bind('mousemove', onDocumentMouseMove);
-	$(window).bind('touchstart', onDocumentTouchMove);
-	$(window).bind('touchmove', onDocumentTouchMove);
+	window.addEventListener('mousemove', onDocumentTouchMove, false); 
+	window.addEventListener('touchstart', onDocumentTouchMove, false);
+	window.addEventListener('touchmove', onDocumentTouchMove, false);
 	return mousePosition;
 }
