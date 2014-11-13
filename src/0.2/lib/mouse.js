@@ -6,17 +6,28 @@ function initMouseBind(canvas) {
 	}
 
 	function onDocumentTouchMove(event) {
-		// touchobj;
-		if (event.touches&&event.touches.length > 0)
-	 		var  touchobj = event.touches[0];  
-		else if (event.changedTouches&&event.changedTouches.length > 0)
-			var touchobj = event.changedTouches[0];
-		else if(event.clientX)
-			var  touchobj = event;
-		MoveMouse(touchobj.clientX, touchobj.clientY);  
-	} 
-	window.addEventListener('mousemove', onDocumentTouchMove, false); 
-	window.addEventListener('touchstart', onDocumentTouchMove, false);
-	window.addEventListener('touchmove', onDocumentTouchMove, false);
+		if (event.touches.length > 1)
+			return;
+		event.preventDefault();
+		var touchobj = event.touches[0];
+		MoveMouse(touchobj.clientX, touchobj.clientY);
+	}
+
+	function onDocumentTouchStart(event) {
+		if (event.touches.length > 1)
+			return;
+		var touchobj = event.touches[0];
+		MoveMouse(touchobj.clientX, touchobj.clientY);
+	}
+
+	function onDocumentMouseMove(event) {
+		var touchobj = event;
+		MoveMouse(touchobj.clientX, touchobj.clientY);
+	}
+
+
+	window.addEventListener('mousemove', onDocumentMouseMove, false);
+	canvas.addEventListener('touchstart', onDocumentTouchStart, false);
+	canvas.addEventListener('touchmove', onDocumentTouchMove, false);
 	return mousePosition;
 }

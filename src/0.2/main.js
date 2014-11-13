@@ -21,8 +21,9 @@ function initBall() {
 	obj_ball = gl_object();
 	obj_ball.mesh = MESH_SPHERE;
 	obj_ball.size = .03 * boxSize[1] / boxSize[2];
-	obj_ball.rotation=null;// vec4.fromValues();
-	 obj_ball.quaternion= quat.create();
+	obj_ball.rotation = null;
+	// vec4.fromValues();
+	obj_ball.quaternion = quat.create();
 	//obj_ball.rotationMatrix=mat4.create() ;
 	for (var i = 0; i < 3; i++)
 		obj_ball.scale[i] = obj_ball.size / 75;
@@ -50,9 +51,9 @@ function setWNMatrix(gl, obj) {
 		mat4.rotateZ(worldMatrix, worldMatrix, obj.rotation[2]);
 	}
 	if (obj.quaternion) {
-		var temp=mat4.create() ; 
-		mat4.fromQuat(temp,obj.quaternion);
-		mat4.multiply(worldMatrix,worldMatrix,temp); 
+		var temp = mat4.create();
+		mat4.fromQuat(temp, obj.quaternion);
+		mat4.multiply(worldMatrix, worldMatrix, temp);
 	}
 	mat4.scale(worldMatrix, worldMatrix, obj.scale);
 	// Make a normalMatrix
@@ -304,8 +305,9 @@ function update(intv) {
 		break;
 	}
 }
+ 
+function onCanvasClick() { 
 
-function onCanvasClick() {
 	switch(state) {
 	case STATE_START:
 		console.log("start");
@@ -348,7 +350,7 @@ function resize() {
 	var w = boxSize[0];
 	var h = boxSize[1];
 
-	var rate_c = 150;
+	var rate_c = 100;
 	var cw = rate_c * w;
 	var ch = rate_c * h;
 	$(canvas).attr('width', cw);
@@ -362,7 +364,9 @@ function resize() {
 	else
 		wh = h * ww / w;
 	$(canvas).css('width', ww);
-	$(canvas).css('height', wh);
+	$(canvas).css('height', wh); 
+	$('#drag_right').css('left', ww); 
+
 }
 
 
@@ -425,7 +429,7 @@ function fps() {
 }
 
 function consoleinfo(s) {
-	$("div").html(s);
+	$("#console").html(s);
 }
 
 function animate(time) {
@@ -435,3 +439,14 @@ function animate(time) {
 	requestAnimationFrame(animate);
 };
 
+function launchIntoFullscreen(element) {
+	if (element.requestFullscreen) {
+		element.requestFullscreen();
+	} else if (element.mozRequestFullScreen) {
+		element.mozRequestFullScreen();
+	} else if (element.webkitRequestFullscreen) {
+		element.webkitRequestFullscreen();
+	} else if (element.msRequestFullscreen) {
+		element.msRequestFullscreen();
+	}
+}
