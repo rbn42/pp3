@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>test</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin: 0; 
+				background-color: black;
+			}
+			#console{
+			    color: white;
+			    position: fixed;
+				z-index: 100;
+			}
+			 
+			#my_canvas{
+			    position: fixed;
+				width: 100%;
+				height: 100%;
+			    z-index: 0;
+			} 
+		</style>
+ 
+		<script src="lib/lib.js"></script>
+		<script src="https://cdn.jsdelivr.net/glmatrix/2.2.0/gl-matrix-min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+		<script src="lib/gl_build.js"></script>
+		<script src="lib/gl_api.js"></script> 
+		<script src="lib/mesh.js"></script>
+		<script src="lib/physic.js"></script>
+		<script src="lib/mouse.js"></script>
+		<script src="shader/build.js"></script>
+		<script src="obj/gridplane.js"></script>
+		<script src="obj/mesh.js"></script>
+		<script src="lib/Textures.js"></script>
+	</head>
+
+	<body>
+		<div id=console >
+			console
+		</div>
+		<canvas id="my_canvas"  >
+			Oops, your browser doesn't support html5 canvas!
+		</canvas> 
+		<script src="main.js"></script>
+	</body>
+</html>
