@@ -5,5 +5,6 @@ cat shader/*.js >> main.min.js
 cat main.js >> main.min.js
 echo "});" >> main.min.js
 mv main.min.js temp.js
-java -jar compiler.jar --js temp.js --js_output_file main.min.js
+java -jar ~/bin/compiler.jar --js temp.js --js_output_file main.min.js
 rm temp.js
+mv main.min.js ../../build/0.2/

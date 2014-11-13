@@ -290,8 +290,8 @@ var STATE_END = 3;
 var state = STATE_START;
 function update(intv) {
 	fps();
-	//	return
-	randomdepth();
+	//	return 
+		randomdepth();
 	ai();
 	switch(state) {
 	case STATE_START:
@@ -305,8 +305,8 @@ function update(intv) {
 		break;
 	}
 }
- 
-function onCanvasClick() { 
+
+function onCanvasClick() {
 
 	switch(state) {
 	case STATE_START:
@@ -364,8 +364,8 @@ function resize() {
 	else
 		wh = h * ww / w;
 	$(canvas).css('width', ww);
-	$(canvas).css('height', wh); 
-	$('#drag_right').css('left', ww); 
+	$(canvas).css('height', wh);
+	$('#drag_right').css('left', ww);
 
 }
 
@@ -374,13 +374,12 @@ $(window).resize(resize);
 $(window).resize();
 function randomdepth() {
 	var obj = gridplanes[parseInt(gridplanes.length * Math.random())];
-	var position = [Math.random(), Math.random()];
+	var position = [Math.random()-1/2, Math.random()-1/2];
 	var d = obj_gridplane_get(obj, position);
-	//debugger
 	if (d > 0) {
-		var depth = Math.random() * .003;
-		depth = depth > d ? 0 : d - depth;
-		obj_gridplane_set(gl, obj.mesh.position.buffer, obj, position, depth);
+		var depth =d*(1- Math.random() /6);
+	//	depth = depth > d ? 0 : d - depth;
+		 obj_gridplane_set(gl, obj.mesh.position.buffer, obj, position, depth);
 		return;
 	}
 
