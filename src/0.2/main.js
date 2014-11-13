@@ -345,12 +345,13 @@ function ai() {
 	obj_pad1.destination[1] = (mousePosition[1] - 1 / 2) * boxSize[1] / boxSize[2];
 
 }
+var resolutionFactor=80;
 
 function resize() {
 	var w = boxSize[0];
 	var h = boxSize[1];
 
-	var rate_c = 100;
+	var rate_c = resolutionFactor;
 	var cw = rate_c * w;
 	var ch = rate_c * h;
 	$(canvas).attr('width', cw);
@@ -418,15 +419,23 @@ function knockOnGrid(wall, position) {
 	var depth = (maxdepth - d) * Math.random() + d;
 	obj_gridplane_set(gl, obj.mesh.position.buffer, obj, position, depth);
 }
-
+var fps_current=0;
 function fps() {
 	if (frameCounter[0]) {
 		var t = frameCounter.length;
 		var f = 1000 * t / (frameCounter[t - 1] - frameCounter[0]);
-		consoleinfo("<table><tr><td>fps</td><td>{0}</td>".format(Math.floor(f)));
+		fps_current=Math.floor(f);
+		consoleinfo("<table><tr><td>fps</td><td>{0}</td>".format(fps_current));
 	}
 }
-
+function resetResolution(){
+	if(fps_current>40){ 
+		resolutionFactor*=1.1;
+		resize();
+	} 
+	setTimeout(resetResolution,3000);
+}
+resetResolution();
 function consoleinfo(s) {
 	$("#console").html(s);
 }
