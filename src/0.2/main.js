@@ -311,7 +311,7 @@ function resize() {
     var w = boxSize[0];
     var h = boxSize[1];
 
-    var rate_c = 200;
+    var rate_c = 150;
     var cw = rate_c * w;
     var ch = rate_c * h;
     $(canvas).attr('width', cw);
